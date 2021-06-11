@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.2/immutable.min.js"></script>
+<script>
+  const {Map, fromJS} = Immutable;
+  let IMap1 = Map({
+      add: 'nanjing',
+      name: 'wh',
+      pwd: Map({
+        pwd1: '131123',
+        pwd2: '1222'
+      })
+    });
+
+    let IMap2 = fromJS({
+      add: 'nanjing',
+      name: 'wh',
+      pwd: {
+        pwd1: '131123',
+        pwd2: '1222'
+      }
+    });
+    //temp1
+    let a1 = IMap1.get('pwd').get('pwd1');
+    let a2 = IMap1.getIn(['pwd', 'pwd1']);
+
+    let b1 = IMap2.get('pwd').get('pwd1');
+    let b2 = IMap2.getIn(['pwd', 'pwd1']);
+    console.log(a1,a2,b1,b2);
+</script>
+</html>

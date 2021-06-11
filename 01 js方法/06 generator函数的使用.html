@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  //generator：发生器、
+  function* foo() {
+    console.log('111');
+    yield 'hello'
+    console.log('222');
+    yield 'world'
+    console.log('333')
+  }
+
+  const fo = foo();
+  console.log(fo.next())  //{done: false value: "hello"}
+  console.log(fo.next())  //{done: false value: "world"}
+  console.log(fo.next())  //{done: true value: "undifend"}
+//2.promise和generator结合使用
+function* f1() {
+  console.log('1111')
+  const result = yield new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('hello world');
+    }, 3000);
+  });
+  console.log(result)  // hello world
+}
+
+const f2 = f1()
+f2.next().value.then((res) => {
+  f2.next(res)
+})
+
+//3.测试代码
+function* f3() {
+  let name = yield 'yanran'
+  console.log(name);
+}
+const f4 = f3()
+f4.next()
+f4.next('hhh')
+
+</script>
+</html>

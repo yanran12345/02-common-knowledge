@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  div {
+    width: 100px;
+    height: 100px;
+    border: 2px solid red;
+    float: left;
+    margin-right: -2px;
+  }
+</style>
+<body>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</body>
+<script>
+  var result = [];
+  var obj = { "retMsg": "操作成功", "retCode": "0000",
+              "result": [
+            { "dataKey": "C", "data": [{ "agentOperatorId": 29986, "agentOperatorName": "测试",  "pinyin": "C" },{ "agentOperatorId": 30122, "agentOperatorName": "测销", "pinyin": "C" }] }, 
+            { "dataKey": "G", "data": [{ "agentOperatorId": 30161, "agentOperatorName": "高先生", "pinyin": "G" }] },
+            { "dataKey": "H", "data": [{ "agentOperatorId": 30162, "agentOperatorName": "花先生", "pinyin": "H" }] },
+            { "dataKey": "S", "data": [{ "agentOperatorId": 30160, "agentOperatorName": "帅先生", "pinyin": "S" }] },
+            { "dataKey": "X", "data": [{ "agentOperatorId": 30105, "agentOperatorName": "销售徐向前", "pinyin": "X" }] }, 
+            { "dataKey": "Y", "data": [{ "agentOperatorId": 29993, "agentOperatorName": "友商云测试", "pinyin": "Y" }, { "agentOperatorId": 30164, "agentOperatorName": "游先生", "pinyin": "Y" }] }, 
+            { "dataKey": "Z", "data": [{ "agentOperatorId": 30159, "agentOperatorName": "忠先生", "pinyin": "Z" }] }] }
+  
+  carryOut()
+  function carryOut() {
+    formartArr(obj.result)
+  }
+  function formartArr(datas) {
+    datas.map((itemx, idx) => {
+      itemx.data.map((itemy, idy) => {
+        result.push(
+          {
+            name: itemy.agentOperatorName,
+            pinyin: [itemy.pinyin],
+            agentid: itemy.agentOperatorId
+          }
+        );
+      });
+    });
+    this.getCitys();
+  }
+
+  function getCitys() {
+    const pinyinList = result;
+    // 按拼音排序
+    pinyinList.sort((c1, c2) => {
+      const pinyin1 = c1.pinyin.join('');
+      const pinyin2 = c2.pinyin.join('');
+      return pinyin1.localeCompare(pinyin2);
+    });
+    // console.log(pinyinList);
+    // 添加首字母
+    const map = new Map();
+    for (const city of pinyinList) {
+      const alpha = city.pinyin[0].charAt(0).toUpperCase();
+      if (!map.has(alpha)) map.set(alpha, []);
+      map.get(alpha).push({
+        agentid: city.agentid,
+        name: city.name
+      });
+    }
+    const keys = [];
+    for (const key of map.keys()) {
+      keys.push(key);
+    }
+    keys.sort();
+    const userList = [];
+    for (const key of keys) {
+      userList.push({
+        alpha: key,
+        subItems: map.get(key)
+      });
+    }
+    // console.log(userList);
+  }
+
+</script>
+
+</html>

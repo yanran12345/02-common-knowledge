@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+  <div id="test" style="width: 1px; height: 17px; background: greenyellow;">0%</div>
+  <input type="button" value="run" id="run"/>        
+</body>
+<script>
+  window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+  window.cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+  var ele = document.getElementById('test');
+  var process = 0;
+  var start;
+  function step(timestamp) {
+    process += 1;
+    ele.style.width = process +'px';
+    ele.innerHTML = process + '%';
+    if(process < 200) {
+      start = requestAnimationFrame(step);
+    }
+  }
+  requestAnimationFrame(step);
+  var run = document.getElementById('run');
+  run.addEventListener('click', function() {
+    console.log('234')
+    cancelAnimationFrame(start);
+  }, false)
+</script>
+</html>

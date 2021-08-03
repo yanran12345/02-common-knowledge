@@ -1,0 +1,21 @@
+// 变量
+$blue : #1875e7;　
+div {
+　color : $blue;
+}
+// 变量嵌套字符串，写在#{}之中
+$side : left;
+.rounded {
+　border-#{$side}-radius: 5px;
+}
+// 计算功能
+body {
+　margin: (14px/2);
+　top: 50px + 100px;
+　right: $var * 10%;
+}
+
+//hover编写
+a {
+  &:hover { color: #ffb3ff; }
+}

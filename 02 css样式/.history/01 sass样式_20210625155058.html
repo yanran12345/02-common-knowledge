@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  /* n从0开始 偶数2n 奇数2n-1 开始3个 -n+3 */
+  .item:nth-child(2n) {
+    color: red;
+  }
+  .item:last-child {
+    color: green;
+  }
+  /* 清楚浮动 */
+  .clearfix::after{
+    zoom:1;
+    content: '';
+    height: 0;
+    line-height: 0;
+    display: block;
+    clear: both;
+    visibility: hidden;
+  }
+
+  /* 单行显示省略号 */
+  .text {
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+  }
+  /* 超出三行显示省略号 */
+  .text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;/*想省略几行就写几*/
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+  }
+
+  /* 三角形 */
+  .triangle {
+    width: 0; 
+    height: 0;
+    border-width: 100px;
+    border-style: solid;
+    border-color:#FFCCCC #0099CC #996699 #339933;
+  }
+  /* 左箭头 */
+  .arrow{
+    position: absolute;
+  }
+  /* .arrow:before,.arrow:after{
+    position: absolute;
+    content: '';
+    border-top: 10px transparent dashed;
+    border-left: 10px transparent dashed;
+    border-bottom: 10px transparent dashed;
+    border-right: 10px #fff solid;
+  } */
+  .arrow:before{
+    border-right: 10px #0099CC solid;
+  }
+  .arrow:after{
+    left: 1px; 
+    border-right: 10px #fff solid;
+  }
+</style>
+<body>
+  <div class="contentWrap">
+    <ul class="fruits">
+      <li class="item">桃子</li>
+      <li class="item">香蕉</li>
+      <li class="item">葡萄</li>
+      <li class="item">橘子</li>
+      <li class="item">芒果</li>
+      <li class="item">香梨</li>
+      <li class="item">榴莲</li>
+    </ul>
+    <div class="triangle"></div>
+    <div class="arrow" ></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+// 变量
+$blue : #1875e7;　
+div {
+　color : $blue;
+}
+// 变量嵌套字符串，写在#{}之中
+$side : left;
+.rounded {
+　border-#{$side}-radius: 5px;
+}
+// 计算功能
+body {
+　margin: (14px/2);
+　top: 50px + 100px;
+　right: $var * 10%;
+}
+//hover编写
+a {
+  &:hover { color: #ffb3ff; }
+}
+// 继承 同事class1有上下文样式也会被继承
+.class1 {
+　　border: 1px solid #ddd;
+}
+.class2 {
+　@extend .class1;
+　font-size:120%;
+}
+// 混入 Mixin
+@mixin left($value: 10px) {
+  float: left;
+  margin-right: $value;
+}
+div {
+  @include left(20px);
+}
+// 颜色函数
+//改变色相  ajust-hue
+// 改变明度 datken：使变暗  lighten:  使变亮
+//改变饱和度（纯度）  saturate：饱和度变高 desaturate：饱和度变低
+lighten(#cc3, 10%) // #d6d65c
+darken(#cc3, 10%) // #a3a329
+grayscale(#cc3) // #808080
+complement(#cc3) // #33c
+// if判断
+p {
+  @if 1 + 1 == 2 { border: 1px solid; }
+  @if 5 < 3 { border: 2px dotted; }
+}
+
+@if lightness($color) > 30% {
+　background-color: #000;
+} @else {
+　background-color: #fff;
+}

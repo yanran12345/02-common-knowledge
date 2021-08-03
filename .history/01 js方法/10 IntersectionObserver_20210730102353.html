@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .box {
+    width: 100%;
+    height: 1500px;
+  }
+  .nav {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: pink;
+  }
+  #bg {
+    width: 100%;
+    height: 600px;
+    background-color: rgb(134, 236, 173);
+  }
+</style>
+<body>
+  <div class="box">
+    <div class="nav">我是导航栏</div>
+    <div id="bg"></div>
+  </div>
+</body>
+<script>
+// time：可见性发生变化的时间，是一个高精度时间戳，单位为毫秒
+// target：被观察的目标元素，是一个 DOM 节点对象
+// rootBounds：根元素的矩形区域的信息，getBoundingClientRect()方法的返回值，如果没有根元素（即直接相对于视口滚动），则返回null
+// boundingClientRect：目标元素的矩形区域的信息
+// intersectionRect：目标元素与视口（或根元素）的交叉区域的信息
+// intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为1，完全不可见时小于等于0
+  toggleNavStyle();
+  function toggleNavStyle() {
+    const bgId = document.getElementById("bg");
+    const nav = document.getElementsByClassName('nav')[0];
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      console.log(entries);
+      console.log(entries[0].isIntersecting);
+    if (entries[0].isIntersecting === false) {
+      nav.style.backgroundColor = 'yellow';
+      return;
+    }
+      nav.style.backgroundColor = 'pink';
+  });
+  // 开始观察
+  intersectionObserver.observe(bgId);
+  // // 停止观察
+  // intersectionObserver.unobserve(bgId);
+  // // 关闭观察器
+  // intersectionObserver.disconnect();
+  }
+</script>
+</html>
